@@ -13,13 +13,30 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      
       debugShowCheckedModeBanner: false,
       title: 'Shopping App',
       theme: ThemeData(
-          primaryColor: Colors.purple,
-          colorScheme: ColorScheme.fromSwatch().copyWith(
-            secondary: Color.fromARGB(255, 215, 184, 91),
-          )),
+        primaryColor: Colors.purple,
+        // canvasColor: Colors.black54,
+        colorScheme: ColorScheme.fromSwatch().copyWith(
+          secondary: Color.fromARGB(255, 215, 184, 91),
+        ),
+        fontFamily: 'Lato',
+        textTheme: ThemeData.light().textTheme.copyWith(
+           headline1: TextStyle(
+              fontFamily: 'Lato-Bold',
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
+              fontSize: 20,
+            ),
+             headline6: TextStyle(
+              // fontFamily: 'Lato-Bold',
+              fontWeight: FontWeight.bold,
+              fontSize: 16,
+            ),
+        )
+      ),
       home: CategoriesScreen(),
       initialRoute: '/',
       routes: {
