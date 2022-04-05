@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:shopping_app/widgets/carousel.dart';
 import '../widgets/app_drawer.dart';
 import '../widgets/carousel.dart';
 import '../widgets/search_bar.dart';
+import '../widgets/grid_list.dart';
+import '../screens/cart_screen.dart';
 
 class CategoriesScreen extends StatelessWidget {
   static const routeName = '/categories';
@@ -34,6 +35,7 @@ class CategoriesScreen extends StatelessWidget {
           IconButton(
             onPressed: () {
               print('clicked');
+              Navigator.of(context).pushNamed(CartScreen.routeName);
             },
             icon: Icon(
               Icons.shopping_cart_checkout_sharp,
@@ -44,16 +46,18 @@ class CategoriesScreen extends StatelessWidget {
       drawer: AppDrawer(),
       body: SingleChildScrollView(
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.end,
           children: [
             SizedBox(
               height: 10,
             ),
-            Container(
-              height: 200,
-              child: Carousel(),
-            ),
+            Carousel(),
             SizedBox(
               height: 10,
+            ),
+            Container(
+              height: 900,
+              child: GridList(),
             ),
           ],
         ),

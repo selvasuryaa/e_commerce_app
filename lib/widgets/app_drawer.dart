@@ -1,5 +1,5 @@
-
 import 'package:flutter/material.dart';
+import '../screens/cart_screen.dart';
 import '../screens/categories_screen.dart';
 
 class AppDrawer extends StatelessWidget {
@@ -15,30 +15,39 @@ class AppDrawer extends StatelessWidget {
             height: 100,
             width: double.infinity,
             color: Colors.purple,
-            child: Text('Browse Amazon', style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),),
+            child: Text(
+              'Browse Amazon',
+              style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold),
+            ),
           ),
           ListTile(
             leading: Icon(
               Icons.border_all_outlined,
             ),
             title: Text('All Products'),
-            onTap: (){
-              Navigator.of(context).pushReplacementNamed(CategoriesScreen.routeName);
+            onTap: () {
+              Navigator.of(context)
+                  .pushReplacementNamed(CategoriesScreen.routeName);
             },
           ),
-           ListTile(
-            leading: Icon(
-              Icons.bookmark_added
-            ),
+          ListTile(
+            leading: Icon(Icons.bookmark_added),
             title: Text('Favourites'),
-          ), ListTile(
+          ),
+          ListTile(
             leading: Icon(
               Icons.shopping_cart_rounded,
             ),
             title: Text('Cart'),
+            onTap: () {
+              Navigator.of(context).pushReplacementNamed(CartScreen.routeName);
+            },
             hoverColor: Theme.of(context).colorScheme.secondary,
           ),
-           ListTile(
+          ListTile(
             leading: Icon(
               Icons.business_center_sharp,
             ),
