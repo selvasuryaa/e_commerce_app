@@ -31,6 +31,10 @@ class ProductsOverviewScreen extends StatelessWidget {
                 },
                 child: Container(
                   decoration: BoxDecoration(
+                      border: Border.all(
+                    width: 2,
+                    color: Colors.black,
+                  ),
                     borderRadius: BorderRadius.circular(10),
                     color: Colors.primaries[Random().nextInt(
                       Colors.primaries.length,

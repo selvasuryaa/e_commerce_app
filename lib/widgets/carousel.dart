@@ -8,9 +8,6 @@ class Carousel extends StatelessWidget {
       height: 200,
       child: ListView(
         children: [
-          // SizedBox(
-          //   height: 10,
-          // ),
           CarouselSlider(
             options: CarouselOptions(
               height: 200,

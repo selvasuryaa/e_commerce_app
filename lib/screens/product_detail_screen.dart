@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
 
-class ProductDetailScreen extends StatelessWidget {
+class ProductDetailScreen extends StatefulWidget {
   static const routeName = '/detail-screen';
 
+  @override
+  State<ProductDetailScreen> createState() => _ProductDetailScreenState();
+}
+
+class _ProductDetailScreenState extends State<ProductDetailScreen> {
+  var isFavourite = false;
   @override
   Widget build(BuildContext context) {
     final args = ModalRoute.of(context)?.settings.arguments;
@@ -12,6 +18,14 @@ class ProductDetailScreen extends StatelessWidget {
         title: Text(
           'Item ${args}',
         ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+      floatingActionButton: FloatingActionButton(
+        child: Icon(isFavourite ? Icons.star : Icons.star_border),
+        onPressed: () {
+          isFavourite = !isFavourite;
+          print('jjj');
+        },
       ),
       body: SingleChildScrollView(
         child: Column(

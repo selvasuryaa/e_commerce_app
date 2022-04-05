@@ -10,6 +10,7 @@ class CategoriesScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final mediaQuery = MediaQuery.of(context);
     return Scaffold(
       appBar: AppBar(
         flexibleSpace: Container(
@@ -46,7 +47,7 @@ class CategoriesScreen extends StatelessWidget {
       drawer: AppDrawer(),
       body: SingleChildScrollView(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.end,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
             SizedBox(
               height: 10,
@@ -56,8 +57,12 @@ class CategoriesScreen extends StatelessWidget {
               height: 10,
             ),
             Container(
-              height: 900,
-              child: GridList(),
+              width: double.infinity,
+              // margin: EdgeInsets.symmetric(vertical: 80, horizontal: 20),
+              // color: Colors.amber,
+              // height: 300,
+              height: mediaQuery.size.height,
+              child: GridList(70),
             ),
           ],
         ),
