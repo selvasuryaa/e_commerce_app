@@ -22,10 +22,9 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
       floatingActionButton: FloatingActionButton(
         child: Icon(isFavourite ? Icons.star : Icons.star_border),
-        onPressed: () {
-          isFavourite = !isFavourite;
-          print('jjj');
-        },
+        onPressed: () => isFavourite = !isFavourite,
+        // isFavourite = !isFavourite;
+        // print('jjj');
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -201,21 +200,25 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
               title: Text('4 GB RAM | 64 GB ROM'),
               subtitle: Text('RAM | ROM'),
             ),
+            Divider(),
             ListTile(
               leading: Icon(Icons.radar),
-              title: Text('6.7 inch Display'),
               subtitle: Text('DISPLAY'),
+              title: Text('6.7 inch Display'),
             ),
+            Divider(),
             ListTile(
               leading: Icon(Icons.radar),
               title: Text('PROCESSOR'),
               subtitle: Text('Octo Core 2.5 Ghz'),
             ),
+            Divider(),
             ListTile(
               leading: Icon(Icons.radar),
               title: Text('50 MP + 20 MP'),
               subtitle: Text('REAR CAMERA'),
             ),
+            Divider(),
             ListTile(
               leading: Icon(Icons.radar),
               title: Text('6000 mAh'),

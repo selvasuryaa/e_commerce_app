@@ -19,6 +19,8 @@ class _GridListState extends State<GridList> {
   Widget build(BuildContext context) {
     return OrientationBuilder(builder: (context, orientation) {
       return GridView.count(
+        shrinkWrap: true,
+        physics: NeverScrollableScrollPhysics(),
         // mainAxisSpacing: 5,
         // crossAxisSpacing: 5,
         // childAspectRatio: 1.5,
