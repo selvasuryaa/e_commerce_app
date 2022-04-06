@@ -19,11 +19,12 @@ class _GridListState extends State<GridList> {
   Widget build(BuildContext context) {
     return OrientationBuilder(builder: (context, orientation) {
       return GridView.count(
+        
         shrinkWrap: true,
         physics: NeverScrollableScrollPhysics(),
         // mainAxisSpacing: 5,
         // crossAxisSpacing: 5,
-        // childAspectRatio: 1.5,
+        // childAspectRatio: 1.7,
         scrollDirection: Axis.vertical,
         // shrinkWrap: true,
         crossAxisCount: orientation == Orientation.portrait ? 2 : 3,
@@ -42,25 +43,34 @@ class _GridListState extends State<GridList> {
                 child: Card(
                   elevation: 10,
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(
-                      20,
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(15),
+                      topRight: Radius.circular(15),
+
+                      bottomLeft: Radius.circular(15),
+                      bottomRight: Radius.circular(15),
+
                     ),
                   ),
                   child: Column(children: [
                     Expanded(
                       child: Stack(
                         children: [
-                          Container(
-                            decoration: BoxDecoration(
-                                color: Colors.primaries[
-                                    Random().nextInt(Colors.primaries.length)]),
-                            width: 300,
-                            height: 200,
-                            child: Center(
-                              child: Text(
-                                'Product ${index}',
-                                textAlign: TextAlign.center,
-                                style: Theme.of(context).textTheme.headline1,
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(15),
+                                  color: Colors.primaries[
+                                      Random().nextInt(Colors.primaries.length)]),
+                              width: 200,
+                              height: 200,
+                              child: Center(
+                                child: Text(
+                                  'Product ${index}',
+                                  textAlign: TextAlign.center,
+                                  style: Theme.of(context).textTheme.headline1,
+                                ),
                               ),
                             ),
                           ),

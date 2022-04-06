@@ -10,20 +10,22 @@ class CategoriesScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final mediaQuery = MediaQuery.of(context);
+    // final mediaQuery = MediaQuery.of(context);
     return Scaffold(
       appBar: AppBar(
         flexibleSpace: Container(
-            decoration: BoxDecoration(
-                gradient: LinearGradient(
-          colors: [
-            Color.fromARGB(255, 248, 4, 4),
-            Color.fromARGB(255, 12, 12, 12),
-            // Color.fromARGB(255, 179, 197, 18),
-          ],
-          begin: Alignment.bottomLeft,
-          end: Alignment.topRight,
-        ))),
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [
+                Color.fromARGB(255, 248, 4, 4),
+                Color.fromARGB(255, 12, 12, 12),
+                // Color.fromARGB(255, 179, 197, 18),
+              ],
+              begin: Alignment.bottomLeft,
+              end: Alignment.topRight,
+            ),
+          ),
+        ),
         backgroundColor: Theme.of(context).primaryColor,
         title: Text('Shopping App'),
         actions: [
@@ -55,6 +57,27 @@ class CategoriesScreen extends StatelessWidget {
             Carousel(),
             SizedBox(
               height: 10,
+            ),
+            Container(
+              alignment: Alignment.centerLeft,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  children: [
+                    Text(
+                      'Deals of the Day',
+                      style: Theme.of(context).textTheme.headline1,
+                    ),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    Icon(
+                      Icons.alarm,
+                      color: Colors.blue,
+                    ),
+                  ],
+                ),
+              ),
             ),
             Container(
               width: double.infinity,

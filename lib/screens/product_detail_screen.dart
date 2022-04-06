@@ -15,6 +15,19 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
     // print(runtimeType);
     return Scaffold(
       appBar: AppBar(
+         flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [
+                Color.fromARGB(255, 248, 4, 4),
+                Color.fromARGB(255, 12, 12, 12),
+                // Color.fromARGB(255, 179, 197, 18),
+              ],
+              begin: Alignment.bottomLeft,
+              end: Alignment.topRight,
+            ),
+          ),
+        ),
         title: Text(
           'Item ${args}',
         ),
