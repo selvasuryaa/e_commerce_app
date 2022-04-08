@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import '../screens/cart_screen.dart';
+import '../screens/user_product_screen.dart';
+// import '../screens/cart_screen.dart';
 import '../screens/categories_screen.dart';
 
 class AppDrawer extends StatelessWidget {
@@ -43,7 +44,7 @@ class AppDrawer extends StatelessWidget {
             ),
             title: Text('Cart'),
             onTap: () {
-              Navigator.of(context).pushReplacementNamed(CartScreen.routeName);
+              // Navigator.of(context).pushReplacementNamed(CartScreen.routeName);
             },
             hoverColor: Theme.of(context).colorScheme.secondary,
           ),
@@ -52,6 +53,16 @@ class AppDrawer extends StatelessWidget {
               Icons.business_center_sharp,
             ),
             title: Text('Orders'),
+          ),
+           ListTile(
+            
+            leading: Icon(
+              Icons.person
+            ),
+            title: Text('User Products'),
+              onTap: () {
+              Navigator.of(context).pushReplacementNamed(UserProductScreen.routeName);
+            },
           ),
         ]),
       ),

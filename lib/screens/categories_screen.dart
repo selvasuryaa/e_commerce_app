@@ -3,7 +3,7 @@ import '../widgets/app_drawer.dart';
 import '../widgets/carousel.dart';
 import '../widgets/search_bar.dart';
 import '../widgets/grid_list.dart';
-import '../screens/cart_screen.dart';
+// import '../screens/cart_screen.dart';
 
 class CategoriesScreen extends StatelessWidget {
   static const routeName = '/categories';
@@ -38,7 +38,7 @@ class CategoriesScreen extends StatelessWidget {
           IconButton(
             onPressed: () {
               print('clicked');
-              Navigator.of(context).pushNamed(CartScreen.routeName);
+              // Navigator.of(context).pushNamed(CartScreen.routeName);
             },
             icon: Icon(
               Icons.shopping_cart_checkout_sharp,
@@ -79,14 +79,7 @@ class CategoriesScreen extends StatelessWidget {
                 ),
               ),
             ),
-            Container(
-              width: double.infinity,
-              // margin: EdgeInsets.symmetric(vertical: 80, horizontal: 20),
-              // color: Colors.amber,
-              // height: 300,
-              // height: mediaQuery.size.height,
-              child: GridList(50),
-            ),
+            GridList(10),
           ],
         ),
       ),

@@ -1,10 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:shopping_app/screens/cart_screen.dart';
+import 'package:animated_splash_screen/animated_splash_screen.dart';
+
 import './screens/categories_screen.dart';
 import './screens/products_overview_screen.dart';
 import './screens/product_detail_screen.dart';
 
-void main() {
+import './screens/user_product_screen.dart';
+
+void main()  {
+  // WidgetsFlutterBinding.ensureInitialized();
+  // var db = DBHelper();
+  // // await db.insertProduct(Product(id: 2, title: 'dress', price: 555));
+
+  //  print(await db.getProducts());
+
   runApp(MyApp());
 }
 
@@ -37,13 +46,21 @@ class MyApp extends StatelessWidget {
                   fontSize: 16,
                 ),
               )),
-      home: CategoriesScreen(),
+      home: AnimatedSplashScreen(
+          duration: 1000,
+          splash: Icons.flutter_dash,
+          splashIconSize: 100,
+          nextScreen: CategoriesScreen(),
+          splashTransition: SplashTransition.rotationTransition,
+          // pageTransitionType: PageTransitionType.scale,
+          backgroundColor: Colors.blue),
       initialRoute: '/',
       routes: {
         CategoriesScreen.routeName: (ctx) => CategoriesScreen(),
         ProductsOverviewScreen.routeName: (ctx) => ProductsOverviewScreen(),
         ProductDetailScreen.routeName: (ctx) => ProductDetailScreen(),
-        CartScreen.routeName: (ctx) => CartScreen(),
+        // CartScreen.routeName: (ctx) => CartScreen(),
+        UserProductScreen.routeName: (ctx) => UserProductScreen(),
       },
     );
   }
