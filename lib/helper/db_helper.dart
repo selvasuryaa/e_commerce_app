@@ -1,4 +1,5 @@
 // import 'package:shopping_app/models/product.dart';
+// import 'package:flutter/material.dart';
 import 'package:shopping_app/models/product.dart';
 import 'package:sqflite/sqflite.dart' as sql;
 import 'package:path/path.dart' as path;
@@ -20,7 +21,8 @@ class DBHelper {
     const dbname = 'products.db';
     final actualdbpath = path.join(dbPath, dbname);
 
-    _database = await sql.openDatabase(actualdbpath, version: 2, onCreate: _createDB);
+    _database =
+        await sql.openDatabase(actualdbpath, version: 2, onCreate: _createDB);
 
     return _database!;
   }
@@ -40,23 +42,23 @@ class DBHelper {
     );
   }
 
-   Future<void> updateProduct(Product product) async {
-//     // try{
+  Future<void> updateProduct(Product product) async {
+    try{
     final db = await database;
     await db.update(
       'userProducts',
       product.toMap(),
       where: 'id == ?',
       whereArgs: [product.id],
-      conflictAlgorithm: ConflictAlgorithm.replace,
+      // conflictAlgorithm: ConflictAlgorithm.replace,
     );
+  
+    print('success');
+    }
+    catch (err){
+      print(err.toString());
+    }
   }
-//     print('success');
-//     // }
-//     // catch (err){
-//     //   print(err);
-//     // }
-//   }
 
   Future<List<Product>> getProducts() async {
     // try {
@@ -79,43 +81,3 @@ class DBHelper {
   }
 }
 
-//   Future<void> 
-
-//  static Future<void> insertProduct(Product product) async {
-//     // try{
-//     final db = await DBHelper.dataBase();
-//     await db.insert(
-//       'user',
-//       product.toMap(),
-//       conflictAlgorithm: ConflictAlgorithm.replace,
-//     );
-//     print('success');
-//     // }
-//     // catch (err){
-//     //   print(err);
-//     // }
-//   }
-
-//   static Future<List<Product>> getProducts() async {
-//     try {
-//       final db = await DBHelper.dataBase();
-//       print('suces');
-//       List<Map<String, dynamic>> items = await db.query('userproducts');
-//       return List.generate(
-//         items.length,
-//         (i) => Product(
-//           title: items[i]['title'],
-//           price: items[i]['price'],
-//         ),
-//       );
-//     } catch (err) {
-//       print('Error$err');
-//       throw err;
-//     }
-//   }
-
-//   static Future<void> deleteProduct(Product product) async {
-//     final db = await DBHelper.dataBase();
-//     await db.delete('userproducts', where: 'id == ?', whereArgs: [product.id]);
-//   }
-// }

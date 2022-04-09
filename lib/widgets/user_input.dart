@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 // import '../helper/db_helper.dart';
 import '../models/product.dart';
 
-class UserInput extends StatelessWidget {
+class UserInput extends StatefulWidget {
   final Function insertFunction;
   // final Function deleteFunction;
   UserInput(
@@ -11,25 +11,49 @@ class UserInput extends StatelessWidget {
       Key? key})
       : super(key: key);
 
-  // var db = DBHelper();
+  @override
+  State<UserInput> createState() => _UserInputState();
+}
 
+class _UserInputState extends State<UserInput> {
   final _titleController = TextEditingController();
+
   final _priceController = TextEditingController();
+  final _titleFocusNode = FocusNode();
+  final _priceFocusNode = FocusNode();
+
+  var initialValues = {
+    'title': '',
+    'price': '',
+  };
 
   @override
   Widget build(BuildContext context) {
+    if (_priceFocusNode.hasFocus) {
+      FocusScope.of(context).unfocus();
+    }
+
+    final scaffold = ScaffoldMessenger.of(context);
     return Column(children: [
-      TextField(
+      TextFormField(
+        focusNode: _titleFocusNode,
+
+        // initialValue: initialValues['title'],
         decoration: InputDecoration(labelText: 'Title'),
         controller: _titleController,
+        textInputAction: TextInputAction.next,
       ),
       // SizedBox(
       //   height: 10,
       // ),
-      TextField(
+      TextFormField(
+        // focusNode: FocusScope.of(context).
+        focusNode: _priceFocusNode,
+        // initialValue: initialValues['price'],
         keyboardType: TextInputType.number,
         decoration: InputDecoration(labelText: 'Price'),
         controller: _priceController,
+        textInputAction: TextInputAction.done,
       ),
       Padding(
           padding: const EdgeInsets.all(20.0),
@@ -47,13 +71,25 @@ class UserInput extends StatelessWidget {
                 ),
               ),
               onPressed: () {
-                var myProduct = Product(
-                  title: _titleController.text,
-                  price: int.parse(_priceController.text),
-                );
-                insertFunction(myProduct);
-                FocusScope.of(context).unfocus();
-              
+                try {
+                  FocusScope.of(context).unfocus();
+                  var myProduct = Product(
+                    title: _titleController.text,
+                    price: int.parse(_priceController.text),
+                  );
+                  widget.insertFunction(myProduct);
+                  _titleController.text = '';
+                  _priceController.text = '';
+
+                  scaffold.showSnackBar(SnackBar(
+                      duration: Duration(seconds: 1),
+                      content:
+                          Text('${myProduct.title.toUpperCase()}  Added')));
+                } catch (error) {
+                  print(error);
+                  throw error;
+                }
+
                 // Navigator.of(context).pop();
               },
               // FocusScope.of(context).unfocus();

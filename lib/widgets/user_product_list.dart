@@ -7,12 +7,13 @@ import '../helper/db_helper.dart';
 // ignore: must_be_immutable
 class UserProductList extends StatelessWidget {
   final Function deleteFunction;
+  final Function updateFunction;
   var db = DBHelper();
-  
-  UserProductList({
-        required this.deleteFunction,
 
-      });
+  UserProductList({
+    required this.deleteFunction,
+    required this.updateFunction,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -38,6 +39,7 @@ class UserProductList extends StatelessWidget {
                       price: data[index].price,
                       deleteFunction: deleteFunction,
                       // insertFuntcion: insertFuntcion,
+                      updateFn: updateFunction,
                     );
                   });
         });

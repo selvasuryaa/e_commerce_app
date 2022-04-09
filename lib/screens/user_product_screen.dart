@@ -20,11 +20,17 @@ class _UserProductScreenState extends State<UserProductScreen> {
 
   void _saveProduct(Product product) async {
     await db.insertProduct(product);
+    // FocusScope.of(context).unfocus();
     setState(() {});
   }
 
   void _deleteProduct(Product prod) async {
     await db.deleteProduct(prod);
+    setState(() {});
+  }
+
+  void _updateProduct(Product prod) async {
+    await db.updateProduct(prod);
     setState(() {});
   }
 
@@ -70,43 +76,51 @@ class _UserProductScreenState extends State<UserProductScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        flexibleSpace: Container(
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              colors: [
-                Color.fromARGB(255, 248, 4, 4),
-                Color.fromARGB(255, 12, 12, 12),
-                // Color.fromARGB(255, 179, 197, 18),
-              ],
-              begin: Alignment.bottomLeft,
-              end: Alignment.topRight,
+    return GestureDetector(
+      onTap: (){
+        FocusScope.of(context).unfocus();
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          flexibleSpace: Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                colors: [
+                  Color.fromARGB(255, 248, 4, 4),
+                  Color.fromARGB(255, 12, 12, 12),
+                  // Color.fromARGB(255, 179, 197, 18),
+                ],
+                begin: Alignment.bottomLeft,
+                end: Alignment.topRight,
+              ),
             ),
           ),
+          title: Text('User Products'),
         ),
-        title: Text('User Products'),
-      ),
-      drawer: AppDrawer(),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: EdgeInsets.all(10),
-          child: Column(
-            children: <Widget>[
-              Container(
-                height: 250,
-                child: UserInput(
-                  insertFunction: _saveProduct,
-                  //  deleteFunction: _deleteProduct
+        drawer: AppDrawer(),
+        body: SingleChildScrollView(
+          keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+          child: Padding(
+            padding: EdgeInsets.all(10),
+            child: Column(
+              children: <Widget>[
+                Container(
+                  height: 250,
+                  child: UserInput(
+                    insertFunction: _saveProduct,
+                    //  deleteFunction: _deleteProduct
+                  ),
                 ),
-              ),
-              UserProductList(
-                // inserFuntcion: _saveProduct,
-               deleteFunction: _deleteProduct,
-               ),
-              // deleteFn: _deleteProduct,
-              //  inserFuntcion: _saveProduct,
-            ],
+                UserProductList(
+                  // inserFuntcion: _saveProduct,
+                  updateFunction: _updateProduct,
+                  deleteFunction: _deleteProduct,
+                ),
+    
+                // deleteFn: _deleteProduct,
+                //  inserFuntcion: _saveProduct,
+              ],
+            ),
           ),
         ),
       ),
