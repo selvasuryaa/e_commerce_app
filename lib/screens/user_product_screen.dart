@@ -102,7 +102,7 @@ class _UserProductScreenState extends State<UserProductScreen> {
               ),
               UserProductList(
                 // inserFuntcion: _saveProduct,
-              //  deleteFunction: ()=>_deleteProduct,
+               deleteFunction: _deleteProduct,
                ),
               // deleteFn: _deleteProduct,
               //  inserFuntcion: _saveProduct,

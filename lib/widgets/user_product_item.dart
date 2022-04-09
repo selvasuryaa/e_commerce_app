@@ -5,17 +5,16 @@ class UserProductItem extends StatefulWidget {
   final int id;
   final String title;
   final int price;
-  // final Function deleteFunction;
+  final Function deleteFunction;
   // final Function insertFunction;
 
   const UserProductItem(
       {required this.id,
       required this.title,
       required this.price,
-      // required this.deleteFunction,
+      required this.deleteFunction,
       // required this.insertFunction,
 
-      
       Key? key})
       : super(key: key);
 
@@ -59,9 +58,7 @@ class _UserProductItemState extends State<UserProductItem> {
             Padding(
               padding: const EdgeInsets.only(right: 10),
               child: IconButton(
-                onPressed:
-                //  widget.deleteFunction(anotherProduct),
-                 null,
+                onPressed: () => widget.deleteFunction(anotherProduct),
                 icon: Icon(
                   Icons.clear,
                 ),

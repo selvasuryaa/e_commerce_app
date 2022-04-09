@@ -1,19 +1,18 @@
 import 'package:flutter/material.dart';
 import '../widgets/user_product_item.dart';
 import '../helper/db_helper.dart';
+// import 'package:meta/meta.dart';
 
 // @immutable
 // ignore: must_be_immutable
 class UserProductList extends StatelessWidget {
-  // final Function deleteFunction;
+  final Function deleteFunction;
   var db = DBHelper();
-  // final Function insertFunction;
   
-  // UserProductList({
-        // required this.deleteFunction,
-      //  required this.inserFuntcion,
+  UserProductList({
+        required this.deleteFunction,
 
-      // });
+      });
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +36,7 @@ class UserProductList extends StatelessWidget {
                       id: data[index].id,
                       title: data[index].title,
                       price: data[index].price,
-                      // deleteFunction: deleteFunction,
+                      deleteFunction: deleteFunction,
                       // insertFuntcion: insertFuntcion,
                     );
                   });
