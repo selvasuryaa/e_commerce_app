@@ -52,6 +52,9 @@ class UserInput extends StatelessWidget {
                   price: int.parse(_priceController.text),
                 );
                 insertFunction(myProduct);
+                FocusScope.of(context).unfocus();
+              
+                // Navigator.of(context).pop();
               },
               // FocusScope.of(context).unfocus();
             )

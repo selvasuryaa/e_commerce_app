@@ -30,7 +30,7 @@ class _UserProductItemState extends State<UserProductItem> {
       price: widget.price,
       id: widget.id,
     );
-
+    final scaffold = ScaffoldMessenger.of(context);
     return Card(
       child: Row(
           // mainAxisAlignment:MainAxisAlignment.start,
@@ -58,7 +58,22 @@ class _UserProductItemState extends State<UserProductItem> {
             Padding(
               padding: const EdgeInsets.only(right: 10),
               child: IconButton(
-                onPressed: () => widget.deleteFunction(anotherProduct),
+                onPressed: () async {
+                  try {
+                    // setState(() {
+                     widget.deleteFunction(anotherProduct);
+                      
+                    // });
+                    scaffold.showSnackBar(SnackBar(content: Text('${widget.title.toUpperCase()}  deleted')));
+                  } catch (err) {
+                    print(err);
+                    throw err;
+                  }
+                },
+
+                // Navigator.of(context).pop();
+                // print('object');
+
                 icon: Icon(
                   Icons.clear,
                 ),

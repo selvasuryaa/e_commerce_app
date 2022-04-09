@@ -39,6 +39,18 @@ class DBHelper {
       conflictAlgorithm: ConflictAlgorithm.replace,
     );
   }
+
+   Future<void> updateProduct(Product product) async {
+//     // try{
+    final db = await database;
+    await db.update(
+      'userProducts',
+      product.toMap(),
+      where: 'id == ?',
+      whereArgs: [product.id],
+      conflictAlgorithm: ConflictAlgorithm.replace,
+    );
+  }
 //     print('success');
 //     // }
 //     // catch (err){
