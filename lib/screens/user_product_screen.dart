@@ -20,8 +20,9 @@ class _UserProductScreenState extends State<UserProductScreen> {
 
   void _saveProduct(Product product) async {
     await db.insertProduct(product);
-    // FocusScope.of(context).unfocus();
+
     setState(() {});
+    // FocusScope.of(context).unfocus();
   }
 
   void _deleteProduct(Product prod) async {

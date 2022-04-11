@@ -19,8 +19,8 @@ class _UserInputState extends State<UserInput> {
   final _titleController = TextEditingController();
 
   final _priceController = TextEditingController();
-  final _titleFocusNode = FocusNode();
-  final _priceFocusNode = FocusNode();
+  // final _titleFocusNode = FocusNode();
+  // final _priceFocusNode = FocusNode();
 
   var initialValues = {
     'title': '',
@@ -29,14 +29,13 @@ class _UserInputState extends State<UserInput> {
 
   @override
   Widget build(BuildContext context) {
-    if (_priceFocusNode.hasFocus) {
-      FocusScope.of(context).unfocus();
-    }
-
     final scaffold = ScaffoldMessenger.of(context);
     return Column(children: [
       TextFormField(
-        focusNode: _titleFocusNode,
+        // focusNode: _titleFocusNode,
+        // onFieldSubmitted: (valu){
+        //   FocusScope.of(context).requestFocus(_priceFocusNode);
+        // },
 
         // initialValue: initialValues['title'],
         decoration: InputDecoration(labelText: 'Title'),
@@ -48,7 +47,7 @@ class _UserInputState extends State<UserInput> {
       // ),
       TextFormField(
         // focusNode: FocusScope.of(context).
-        focusNode: _priceFocusNode,
+        // focusNode: _priceFocusNode,
         // initialValue: initialValues['price'],
         keyboardType: TextInputType.number,
         decoration: InputDecoration(labelText: 'Price'),
@@ -72,7 +71,12 @@ class _UserInputState extends State<UserInput> {
               ),
               onPressed: () {
                 try {
-                  FocusScope.of(context).unfocus();
+                  FocusScopeNode currentFocus = FocusScope.of(context);
+                  if (!currentFocus.hasPrimaryFocus &&
+                      currentFocus.focusedChild != null) {
+                    currentFocus.focusedChild?.unfocus();
+                  }
+
                   var myProduct = Product(
                     title: _titleController.text,
                     price: int.parse(_priceController.text),
