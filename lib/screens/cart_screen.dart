@@ -1,74 +1,79 @@
-// import 'package:flutter/material.dart';
-// import '../models/product.dart';
-// import '../widgets/app_drawer.dart';
-// import '../helper/db_helper.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
-// class CartScreen extends StatefulWidget {
-//   static const routeName = '/cart';
+import 'package:flutter/material.dart';
+import '../widgets/app_drawer.dart';
+import '../models/placeholder.dart';
 
-//   @override
-//   State<CartScreen> createState() => _CartScreenState();
-// }
+class CartScreen extends StatefulWidget {
+  static const routeName = '/cart';
 
-// class _CartScreenState extends State<CartScreen> {
-//   List<Product> _items = [];
-//   var future;
+  @override
+  State<CartScreen> createState() => _CartScreenState();
+}
 
+class _CartScreenState extends State<CartScreen> {
+ Future<Placeholderss> fetchPlaceholder() async {
+    final response = await http
+        .get(Uri.parse('https://jsonplaceholder.typicode.com/todos/77'));
 
-//   Future<List<Map<String, Object>>>  _fetchProduct() async {
-//     final dataList = await DBHelper.getdata('user_products');
+    var jsondata = jsonDecode(response.body);
+    var data = Placeholderss(
+      id: jsondata['id'],
+      completed: jsondata['completed'],
+      title: jsondata['title'],
+      userId: jsondata['userId'],
+    );
 
-//     print(dataList);
-//     _items = dataList.map((item) {
-//       return Product(
-//         id: item['id'],
-//         title: item['title'],
-//         price: item['price'],
-//       );
-//     }).toList();
-//     throw _items;
-//   }
-//   @override
-//   void initState() {
-//     future = _fetchProduct();
-//     super.initState();
-//   }
+    return data;
+ }
 
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         title: Text('Carts'),
-//       ),
-//       drawer: AppDrawer(),
-//       body: FutureBuilder(
-//           // initialData: const [],
-//           future: future,
-//           builder: (BuildContext ctx, AsyncSnapshot<List> snapshot) {
-//             // var data = snapshot.data;
-//             // var dataLength = data!.length;
-
-//              if (snapshot.connectionState == ConnectionState.waiting) {
-//                       return Center(child: CircularProgressIndicator());
-//                     } else if (snapshot.connectionState ==
-//                         ConnectionState.done) {
-//                       return ListView.builder(
-//                         shrinkWrap: true,
-//                         physics: NeverScrollableScrollPhysics(),
-//                         itemBuilder: (ctx, i) {
-//                           return ListTile(
-//                             title: Text(_items[i].title),
-//                           );
-//                         },
-//                         itemCount: _items.length,
-//                       );
-//                     } else {
-//                       return Center(
-//                         child: const Text(
-//                             'Got no proucts yet, start adding some!'),
-//                       );
-//                     }
-//           }),
-//     );
-//   }
-// }
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Carts'),
+      ),
+      drawer: AppDrawer(),
+      body: FutureBuilder<Placeholderss>(
+          future: fetchPlaceholder(),
+          builder: (ctx, snapshot) {
+         
+            if (snapshot.hasData) {
+              return Card(
+                elevation: 10,
+                margin: EdgeInsets.all(10),
+                child: Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Container(
+                    height: 100,
+                    width: double.infinity,
+                    child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Title: ${snapshot.data!.title}',
+                          ),
+                          Text(
+                            'Id : ${snapshot.data!.id.toString()}',
+                          ),
+                          Text(
+                            'User ID :${snapshot.data!.userId.toString()}',
+                          ),
+                          Text(
+                            'Completed : ${snapshot.data!.completed.toString()}',
+                          )
+                        ]),
+                  ),
+                ),
+              );
+            } else if (snapshot.hasError) {
+              return Text('Failed to load ${snapshot.error}');
+            } else {
+              return const CircularProgressIndicator();
+            }
+          }),
+    );
+  }
+}

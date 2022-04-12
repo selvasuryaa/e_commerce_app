@@ -4,8 +4,9 @@ import 'package:animated_splash_screen/animated_splash_screen.dart';
 import './screens/categories_screen.dart';
 import './screens/products_overview_screen.dart';
 import './screens/product_detail_screen.dart';
-
 import './screens/user_product_screen.dart';
+import './screens/cart_screen.dart';
+
 
 void main()  {
   // WidgetsFlutterBinding.ensureInitialized();
@@ -59,7 +60,7 @@ class MyApp extends StatelessWidget {
         CategoriesScreen.routeName: (ctx) => CategoriesScreen(),
         ProductsOverviewScreen.routeName: (ctx) => ProductsOverviewScreen(),
         ProductDetailScreen.routeName: (ctx) => ProductDetailScreen(),
-        // CartScreen.routeName: (ctx) => CartScreen(),
+        CartScreen.routeName: (ctx) => CartScreen(),
         UserProductScreen.routeName: (ctx) => UserProductScreen(),
       },
     );
