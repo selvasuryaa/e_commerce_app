@@ -14,11 +14,11 @@ class Placeholderss {
     required this.completed,
   });
 
-  // factory Placeholderss.fromJson(Map<String, dynamic> json) {
-  //   return Placeholderss(
-  //       id: json['id'],
-  //       userId: json['userId'],
-  //       title: json['title'],
-  //       completed: json['completed']);
-  // }
+  factory Placeholderss.fromJson(Map<dynamic, dynamic> json) {
+    return Placeholderss(
+        id: json['id'],
+        userId: json['userId'],
+        title: json['title'],
+        completed: json['completed']);
+  }
 }

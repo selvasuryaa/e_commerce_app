@@ -13,20 +13,29 @@ class CartScreen extends StatefulWidget {
 }
 
 class _CartScreenState extends State<CartScreen> {
- Future<Placeholderss> fetchPlaceholder() async {
+  List<Placeholderss> listData = [];
+
+  Future<List<Placeholderss>> fetchPlaceholder() async {
     final response = await http
-        .get(Uri.parse('https://jsonplaceholder.typicode.com/todos/77'));
+        .get(Uri.parse('https://jsonplaceholder.typicode.com/todos/'));
 
     var jsondata = jsonDecode(response.body);
-    var data = Placeholderss(
-      id: jsondata['id'],
-      completed: jsondata['completed'],
-      title: jsondata['title'],
-      userId: jsondata['userId'],
-    );
-
-    return data;
- }
+    if (response.statusCode == 200) {
+      for (Map i in jsondata) {
+        listData.add(Placeholderss.fromJson(i));
+      }
+      return listData;
+    } else {
+      return listData;
+      // throw Exception('Failed to load data');
+    }
+    // var datas = Placeholderss(
+    //   id: jsondata['id'],
+    //   completed: jsondata['completed'],
+    //   title: jsondata['title'],
+    //   userId: jsondata['userId'],
+    // );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,43 +44,37 @@ class _CartScreenState extends State<CartScreen> {
         title: Text('Carts'),
       ),
       drawer: AppDrawer(),
-      body: FutureBuilder<Placeholderss>(
+      body: FutureBuilder<List<Placeholderss>>(
           future: fetchPlaceholder(),
           builder: (ctx, snapshot) {
-         
             if (snapshot.hasData) {
-              return Card(
-                elevation: 10,
-                margin: EdgeInsets.all(10),
-                child: Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: Container(
-                    height: 100,
-                    width: double.infinity,
-                    child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Title: ${snapshot.data!.title}',
+              return ListView.builder(
+                itemBuilder: (ctx, i) {
+                  return Column(
+                    children: [
+                      ListTile(
+                        title: Text(listData[i].title),
+                        subtitle: Text(
+                          listData[i].completed.toString(),
+                        ),
+                        leading: CircleAvatar(
+                          child: Text(
+                            listData[i].id.toString(),
                           ),
-                          Text(
-                            'Id : ${snapshot.data!.id.toString()}',
-                          ),
-                          Text(
-                            'User ID :${snapshot.data!.userId.toString()}',
-                          ),
-                          Text(
-                            'Completed : ${snapshot.data!.completed.toString()}',
-                          )
-                        ]),
-                  ),
-                ),
+                        ),
+                      ),
+                      Divider(),
+                    ],
+                  );
+                },
+                itemCount: listData.length,
               );
             } else if (snapshot.hasError) {
               return Text('Failed to load ${snapshot.error}');
             } else {
-              return const CircularProgressIndicator();
+              return Center(
+                child: const CircularProgressIndicator(),
+              );
             }
           }),
     );
